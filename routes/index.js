@@ -161,7 +161,7 @@ router.post('/api/microcard/:url', async (req, res) => {
 });
 
 //////////////////////// sitemap
-const sitemapPath = path.join(__dirname, './components/sitemap.xml');
+const sitemapPath = path.join(__dirname, 'components/sitemap.xml');
 
 // Middleware to serve the sitemap.xml file
 router.get('/sitemap.xml', (req, res) => {

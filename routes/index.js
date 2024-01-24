@@ -34,10 +34,15 @@ const microCardSchema = new mongoose.Schema({
 const microLinkSchema = new mongoose.Schema({
   userId: String,link: String,title: String,image: String
 });
+
+const microAddLinkSchema = new mongoose.Schema({
+  userId: String, url: String,link: String,title: String,image: String
+});
 /////////////////////////////////
 const MicroWebsite = mongoose.model('MicroWebsite', microWebsiteSchema);
 const MicroCard = mongoose.model('MicroCard', microCardSchema);
 const MicroLink = mongoose.model('MicroLink', microLinkSchema);
+const MicroAddLink = mongoose.model('MicroAddLink', microAddLinkSchema);
 
 //////////////////////////////////////
 router.post('/api/microwebsites', async (req, res) => {
@@ -72,6 +77,19 @@ router.post('/api/newlinkprofile', async (req, res) => {
   try {
     const microLink = new MicroLink({ userId, link,title,image });
     await microLink.save();
+    res.status(201).json({ success: true });
+  } catch (error) {
+    console.error('Error saving micro website:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
+router.post('/api/addbiolink', async (req, res) => {
+  const { userId, link,url,title,image } = req.body;
+
+  try {
+    const microAddLink = new MicroAddLink({ userId,url, link,title,image });
+    await microAddLink.save();
     res.status(201).json({ success: true });
   } catch (error) {
     console.error('Error saving micro website:', error);
@@ -125,7 +143,7 @@ router.get('/api/microcards/:userId', async (req, res) => {
   }
 });
 
-router.get('/api/microwebsites/:biolink', async (req, res) => {
+router.get('/api/microbiolink/:biolink', async (req, res) => {
   const biolink = req.params.biolink;
 
   try {
@@ -137,6 +155,17 @@ router.get('/api/microwebsites/:biolink', async (req, res) => {
   }
 });
 
+router.get('/api/microaddlink/:url', async (req, res) => {
+  const url = req.params.url;
+
+  try {
+    const microAddLinks = await MicroAddLink.find({ url });
+    res.status(200).json({ success: true, microAddLinks });
+  } catch (error) {
+    console.error('Error fetching micro websites:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
 ////////////////delete
 
 

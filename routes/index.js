@@ -193,19 +193,6 @@ router.post('/api/microcard/:url', async (req, res) => {
 });
 
 //////////////////////// sitemap
-const sitemapPath = path.join(__dirname, 'components/sitemap.xml');
-
-// Middleware to serve the sitemap.xml file
-router.get('/sitemap.xml', (req, res) => {
-  res.sendFile(sitemapPath, (err) => {
-    if (err) {
-      // Handle the error, for example, log it and send a 500 status
-      console.error(err);
-      res.status(500).end();
-    }
-  });
-});
-
 
 
 

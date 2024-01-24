@@ -32,7 +32,7 @@ const microCardSchema = new mongoose.Schema({
 });
 
 const microLinkSchema = new mongoose.Schema({
-  userId: String,url: String,title: String,image: String
+  userId: String,link: String,title: String,image: String
 });
 /////////////////////////////////
 const MicroWebsite = mongoose.model('MicroWebsite', microWebsiteSchema);

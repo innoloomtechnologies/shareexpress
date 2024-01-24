@@ -67,10 +67,10 @@ router.post('/api/microcard', async (req, res) => {
 });
 
 router.post('/api/newlinkprofile', async (req, res) => {
-  const { userId, content } = req.body;
+  const { userId, link,title,image } = req.body;
 
   try {
-    const microLink = new MicroLink({ userId, url,title,image });
+    const microLink = new MicroLink({ userId, link,title,image });
     await microLink.save();
     res.status(201).json({ success: true });
   } catch (error) {
@@ -129,7 +129,7 @@ router.get('/api/microwebsites/:biolink', async (req, res) => {
   const biolink = req.params.biolink;
 
   try {
-    const microLinks = await MicroLink.find({ url });
+    const microLinks = await MicroLink.find({ biolink });
     res.status(200).json({ success: true, microLinks });
   } catch (error) {
     console.error('Error fetching micro websites:', error);

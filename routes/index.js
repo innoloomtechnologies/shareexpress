@@ -21,7 +21,7 @@ mongoose.connect('mongodb+srv://pratiknagalgave1:Pratikchecom@cluster0.40wkmjj.m
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
+//////////////////////////
 const microWebsiteSchema = new mongoose.Schema({
   userId: String,
   content: String,
@@ -31,9 +31,15 @@ const microCardSchema = new mongoose.Schema({
   userId: String,url: String,name: String,company: String,designation: String,contact: String,email: String,profilepic: String,coverpic: String,location: String,facebook: String,instagram: String,github: String,twitter: String
 });
 
+const microLinkSchema = new mongoose.Schema({
+  userId: String,url: String,title: String,image: String
+});
+/////////////////////////////////
 const MicroWebsite = mongoose.model('MicroWebsite', microWebsiteSchema);
 const MicroCard = mongoose.model('MicroCard', microCardSchema);
+const MicroLink = mongoose.model('MicroLink', microLinkSchema);
 
+//////////////////////////////////////
 router.post('/api/microwebsites', async (req, res) => {
   const { userId, content } = req.body;
 
@@ -59,6 +65,20 @@ router.post('/api/microcard', async (req, res) => {
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 });
+
+router.post('/api/newlinkprofile', async (req, res) => {
+  const { userId, content } = req.body;
+
+  try {
+    const microLink = new MicroLink({ userId, url,title,image });
+    await microLink.save();
+    res.status(201).json({ success: true });
+  } catch (error) {
+    console.error('Error saving micro website:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+//////////////////////////////////////
 
 router.get('/api/microwebsites/:userId', async (req, res) => {
   const userId = req.params.userId;
@@ -99,6 +119,18 @@ router.get('/api/microcards/:userId', async (req, res) => {
   try {
     const microCards = await MicroCard.find({ userId });
     res.status(200).json({ success: true, microCards });
+  } catch (error) {
+    console.error('Error fetching micro websites:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
+router.get('/api/microwebsites/:biolink', async (req, res) => {
+  const biolink = req.params.biolink;
+
+  try {
+    const microLinks = await MicroLink.find({ url });
+    res.status(200).json({ success: true, microLinks });
   } catch (error) {
     console.error('Error fetching micro websites:', error);
     res.status(500).json({ success: false, error: 'Internal Server Error' });

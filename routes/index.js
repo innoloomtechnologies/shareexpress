@@ -115,9 +115,10 @@ router.get('/api/micrwebsites/card/:url', async (req, res) => {
  
   try {
     const microCards = await MicroCard.find({ url });
+const isLinkInMicroLinks = microCards.some(item => item.url === url);
     
     
-    if(microCards.map(item => item.url).includes(url)){
+    if(isLinkInMicroLinks){
       res.status(200).json({ exist:true,success: true, microCards });
     }else{
       res.status(200).json({ exist:false,success: true, microCards });
@@ -150,7 +151,14 @@ router.get('/api/microbiolink/:link', async (req, res) => {
     const microLinks = await MicroLink.find({ link });
 console.log(link);
 console.log(microLinks);
-    res.status(200).json({ success: true, microLinks });
+const isLinkInMicroLinks = microLinks.some(item => item.link === link);
+
+if(isLinkInMicroLinks){
+ res.status(200).json({ exist:true,success: true, microLinks });
+}else{
+ res.status(200).json({exist:false, success: true, microLinks });
+}
+   
   } catch (error) {
     console.error('Error fetching micro websites:', error);
     res.status(500).json({ success: false, error: 'Internal Server Error' });

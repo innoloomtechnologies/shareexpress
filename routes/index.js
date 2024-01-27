@@ -143,12 +143,12 @@ router.get('/api/microcards/:userId', async (req, res) => {
   }
 });
 
-router.get('/api/microbiolink/:biolink', async (req, res) => {
-  const biolink = req.params.biolink;
+router.get('/api/microbiolink/:link', async (req, res) => {
+  const link = req.params.biolink;
 
   try {
-    const microLinks = await MicroLink.find({ biolink });
-console.log(biolink);
+    const microLinks = await MicroLink.find({ link });
+console.log(link);
 console.log(microLinks);
     res.status(200).json({ success: true, microLinks });
   } catch (error) {

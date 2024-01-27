@@ -85,10 +85,10 @@ router.post('/api/newlinkprofile', async (req, res) => {
 });
 
 router.post('/api/addbiolink', async (req, res) => {
-  const { userId, link,url,title,image } = req.body;
+  const { userId, link,url,title,image,biolink } = req.body;
 
   try {
-    const microAddLink = new MicroAddLink({ userId,url, link,title,image });
+    const microAddLink = new MicroAddLink({ userId,url, link,title,image,biolink });
     await microAddLink.save();
     res.status(201).json({ success: true });
   } catch (error) {
@@ -173,11 +173,11 @@ console.log(microLinks);
 });
 //////==================================================
 
-router.get('/api/microaddlink/:link', async (req, res) => {
-  const link = req.params.link;
+router.get('/api/microaddlink/:biolink', async (req, res) => {
+  const biolink = req.params.biolink;
 
   try {
-    const microAddLinks = await MicroAddLink.find({ link });
+    const microAddLinks = await MicroAddLink.find({ biolink });
     res.status(200).json({ success: true, microAddLinks });
   } catch (error) {
     console.error('Error fetching micro websites:', error);

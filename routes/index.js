@@ -208,6 +208,19 @@ router.get('/api/microcards/delete/:url', async (req, res) => {
   }
 });
 
+////----------------------------
+router.get('/api/microaddlink/delete/:link', async (req, res) => {
+  const link = req.params.link;
+
+  try {
+    const microAddLinks = await MicroAddLink.deleteOne({ link });
+    res.status(200).json({ success: true, microAddLinks });
+  } catch (error) {
+    console.error('Error fetching micro websites:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
 
 /////modify data
 router.post('/api/microcard/:url', async (req, res) => {

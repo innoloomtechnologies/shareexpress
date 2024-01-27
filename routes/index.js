@@ -144,7 +144,7 @@ router.get('/api/microcards/:userId', async (req, res) => {
 });
 
 router.get('/api/microbiolink/:link', async (req, res) => {
-  const link = req.params.biolink;
+  const link = req.params.link;
 
   try {
     const microLinks = await MicroLink.find({ link });

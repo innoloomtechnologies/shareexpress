@@ -209,11 +209,11 @@ router.get('/api/microcards/delete/:url', async (req, res) => {
 });
 
 ////----------------------------
-router.get('/api/microaddlink/delete/:link', async (req, res) => {
-  const link = req.params.link;
+router.get('/api/microaddlink/delete/:_id', async (req, res) => {
+  const _id = req.params._id;
 
   try {
-    const microAddLinks = await MicroAddLink.deleteOne({ link });
+    const microAddLinks = await MicroAddLink.deleteOne({ _id });
     res.status(200).json({ success: true, microAddLinks });
   } catch (error) {
     console.error('Error fetching micro websites:', error);

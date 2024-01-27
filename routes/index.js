@@ -162,7 +162,7 @@ router.get('/api/microbiolinkid/:userId', async (req, res) => {
   const userId = req.params.userId;
 
   try {
-    const microLinks = await MicroLink.find({ UserId });
+    const microLinks = await MicroLink.find({ userId });
 console.log(link);
 console.log(microLinks);
     res.status(200).json({ success: true, microLinks });

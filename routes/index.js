@@ -36,7 +36,7 @@ const microLinkSchema = new mongoose.Schema({
 });
 
 const microAddLinkSchema = new mongoose.Schema({
-  userId: String, url: String,link: String,title: String,image: String
+  userId: String, url: String,link: String,title: String,image: String, biolink: String
 });
 /////////////////////////////////
 const MicroWebsite = mongoose.model('MicroWebsite', microWebsiteSchema);

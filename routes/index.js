@@ -148,6 +148,8 @@ router.get('/api/microbiolink/:biolink', async (req, res) => {
 
   try {
     const microLinks = await MicroLink.find({ biolink });
+console.log(biolink);
+console.log(microLinks);
     res.status(200).json({ success: true, microLinks });
   } catch (error) {
     console.error('Error fetching micro websites:', error);

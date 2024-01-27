@@ -142,7 +142,7 @@ router.get('/api/microcards/:userId', async (req, res) => {
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 });
-
+/////////////////////////====================================
 router.get('/api/microbiolink/:link', async (req, res) => {
   const link = req.params.link;
 
@@ -157,6 +157,22 @@ console.log(microLinks);
   }
 });
 
+
+router.get('/api/microbiolinkid/:userId', async (req, res) => {
+  const userId = req.params.userId;
+
+  try {
+    const microLinks = await MicroLink.find({ UserId });
+console.log(link);
+console.log(microLinks);
+    res.status(200).json({ success: true, microLinks });
+  } catch (error) {
+    console.error('Error fetching micro websites:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+//////==================================================
+
 router.get('/api/microaddlink/:link', async (req, res) => {
   const link = req.params.link;
 
@@ -168,6 +184,7 @@ router.get('/api/microaddlink/:link', async (req, res) => {
     res.status(500).json({ success: false, error: 'Internal Server Error' });
   }
 });
+
 ////////////////delete
 
 

@@ -157,11 +157,11 @@ console.log(microLinks);
   }
 });
 
-router.get('/api/microaddlink/:url', async (req, res) => {
-  const url = req.params.url;
+router.get('/api/microaddlink/:link', async (req, res) => {
+  const link = req.params.link;
 
   try {
-    const microAddLinks = await MicroAddLink.find({ url });
+    const microAddLinks = await MicroAddLink.find({ link });
     res.status(200).json({ success: true, microAddLinks });
   } catch (error) {
     console.error('Error fetching micro websites:', error);

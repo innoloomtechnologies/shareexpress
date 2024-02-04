@@ -28,7 +28,7 @@ const microWebsiteSchema = new mongoose.Schema({
 });
 
 const microCardSchema = new mongoose.Schema({
-  userId: String,url: String,name: String,company: String,designation: String,contact: String,email: String,profilepic: String,coverpic: String,location: String,facebook: String,instagram: String,github: String,twitter: String
+  userId: String,url: String,name: String,company: String,designation: String,contact: String,email: String,profilepic: String,coverpic: String,location: String,linkedin: String,facebook: String,instagram: String,github: String,twitter: String
 });
 
 const microLinkSchema = new mongoose.Schema({
@@ -59,10 +59,10 @@ router.post('/api/microwebsites', async (req, res) => {
 });
 
 router.post('/api/microcard', async (req, res) => {
-  const { userId,url,name,company,designation,contact,email,profilepic,coverpic,location,facebook,instagram,github,twitter } = req.body;
+  const { userId,url,name,company,designation,contact,email,profilepic,coverpic,location,linkedin, facebook,instagram,github,twitter } = req.body;
 
   try {
-    const microCard = new MicroCard({ userId, url,name,company,designation,contact,email,profilepic,coverpic,location,facebook,instagram,github,twitter });
+    const microCard = new MicroCard({ userId, url,name,company,designation,contact,email,profilepic,coverpic,location,linkedin, facebook,instagram,github,twitter });
     await microCard.save();
     res.status(201).json({ success: true });
   } catch (error) {
@@ -237,7 +237,7 @@ router.get('/api/microbiolink/delete/:_id', async (req, res) => {
 
 /////modify data
 router.post('/api/microcard/:url', async (req, res) => {
-  const { userId, name, company, designation, contact, email, profilepic, coverpic, location, facebook, instagram, github, twitter } = req.body;
+  const { userId, name, company, designation, contact, email, profilepic, coverpic, location,linkedin, facebook, instagram, github, twitter } = req.body;
   const urlParam = req.params.url;
 
   try {
@@ -254,6 +254,7 @@ router.post('/api/microcard/:url', async (req, res) => {
         profilepic,
         coverpic,
         location,
+linkedin,
         facebook,
         instagram,
         github,
